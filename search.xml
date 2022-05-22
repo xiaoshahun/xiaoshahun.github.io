@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/05/11/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>小傻混的OPENCV摆烂日记</title>
+    <url>/2022/05/20/%E5%B0%8F%E5%82%BB%E6%B7%B7%E7%9A%84OPENCV%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><hr>
+<h2 id="imread-amp-amp-imshow"><a href="#imread-amp-amp-imshow" class="headerlink" title="imread &amp;&amp; imshow"></a>imread &amp;&amp; imshow</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;opencv2/opencv.hpp&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;, IMREAD_GRAYSCALE);//读图片  第二个参数为色彩</span><br><span class="line">	if (src.empty())//判断图像是否读取成功</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;no image&quot; &lt;&lt; endl;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	namedWindow(&quot;input&quot;, WINDOW_FREERATIO);//自由拉伸窗口</span><br><span class="line">	imshow(&quot;input&quot;, src);//只支持256色8位，浮动</span><br><span class="line">	waitKey(0);//0为停止  其余数字停顿x毫秒</span><br><span class="line">	destroyAllWindows();//销毁之前窗口</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">imread第二参数</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IMREAD_ANYCOLOR</td>
+<td align="center">彩色图像</td>
+</tr>
+<tr>
+<td align="center">IMREAD_ANYDEPTH</td>
+<td align="center">任意深度图像</td>
+</tr>
+<tr>
+<td align="center">IMREAD_GRAYSCALE</td>
+<td align="center">灰度图</td>
+</tr>
+</tbody></table>
+<p><em>imshow 不能超过640x640</em><br><em>imread 读取路径不能有空格要跟名字完全一致</em></p>
+<hr>
+<h2 id="imwrite-amp-amp-图像格式转换"><a href="#imwrite-amp-amp-图像格式转换" class="headerlink" title="imwrite &amp;&amp; 图像格式转换"></a>imwrite &amp;&amp; 图像格式转换</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void colorSpace(Mat&amp; image)</span><br><span class="line">&#123;</span><br><span class="line">	Mat gray, hsv;</span><br><span class="line">	cvtColor(image, hsv, COLOR_BGR2HSV);//hsv图像为image（BGR）图像hsv转换后的图像</span><br><span class="line">    //H(0~180)(颜色) S(饱和度) V(亮度)</span><br><span class="line">	cvtColor(image, gray, COLOR_BGR2GRAY);//gray图像为image图像的灰度图</span><br><span class="line">	imwrite(&quot;D:/0/gray.jpg&quot;, gray);//保存图像至D:/0/gray.jpg</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="图像的创建与赋值-amp-amp-空白图像的创建"><a href="#图像的创建与赋值-amp-amp-空白图像的创建" class="headerlink" title="图像的创建与赋值 &amp;&amp; 空白图像的创建"></a>图像的创建与赋值 &amp;&amp; 空白图像的创建</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	//创建--克隆    出现新的地址</span><br><span class="line">	Mat m1 = src.clone();</span><br><span class="line">	//复制    出现新的地址</span><br><span class="line">	Mat m2;</span><br><span class="line">	src.copyTo(m2);</span><br><span class="line">	//赋值    m3指针的指向改变</span><br><span class="line">	Mat m3 = src;</span><br><span class="line">	//创建空白图像</span><br><span class="line">	Mat m4 = Mat::zeros(Size(512, 512), CV_8UC3);//CV_8UC3   8位无符号char三通道图片</span><br><span class="line">	//cout &lt;&lt; m4.cols &lt;&lt; &quot; &quot; &lt;&lt; m4.rows &lt;&lt; &quot; &quot; &lt;&lt; m4.channels() &lt;&lt; endl;//获取图像宽、高、通道数</span><br><span class="line">	m4 = Scalar(0, 255, 0);//给全部像素通道赋值</span><br><span class="line">	//cout &lt;&lt; m4 &lt;&lt; endl;</span><br><span class="line">	imshow(&quot;创建图像&quot;, m4);</span><br><span class="line">	</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="图像像素的读取和操作"><a href="#图像像素的读取和操作" class="headerlink" title="图像像素的读取和操作"></a>图像像素的读取和操作</h2><p>对图像的操作索引有两种方式：row and col ； 指针索引<br>dims不同返回的值的格式也不同</p>
+<hr>
+<h3 id="行列索引"><a href="#行列索引" class="headerlink" title="行列索引"></a>行列索引</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	int w = src.cols;//宽</span><br><span class="line">	int h = src.rows;//高</span><br><span class="line">	int dims = src.channels();//通道</span><br><span class="line">	//根据row  and  col来索引</span><br><span class="line">	for (int rows = 0; rows &lt; h; rows++)//两个for遍历图片所有像素</span><br><span class="line">	&#123;</span><br><span class="line">		for (int cols = 0; cols &lt; w; cols++)</span><br><span class="line">		&#123;</span><br><span class="line">			//dims通道数判断  通道不同返回值不同</span><br><span class="line">			if (dims == 1)//灰度图</span><br><span class="line">			&#123;</span><br><span class="line">				int pv = src.at&lt;uchar&gt;(rows, cols);//像素读取</span><br><span class="line">				src.at&lt;uchar&gt;(rows, cols) = 255 - pv;//像素改写</span><br><span class="line">			&#125;</span><br><span class="line">			if (dims == 3)//RGB 彩图</span><br><span class="line">			&#123;</span><br><span class="line">				Vec3b bgr = src.at&lt;Vec3b&gt;(rows, cols);</span><br><span class="line">				//像素读取   3通道  一个像素  3个值    Vec3b类似于int数组</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows,cols)[0] = 255 - bgr[0];//像素改写</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows, cols)[1] = 255 - bgr[1];</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows, cols)[2] = 255 - bgr[2];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;input&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="指针索引"><a href="#指针索引" class="headerlink" title="指针索引"></a>指针索引</h3><p>相较于 row和col的索引<br>指针索引效率更高  但如果不仔细指针所带来的问题难以发现</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	int w = src.cols;//宽</span><br><span class="line">	int h = src.rows;//高</span><br><span class="line">	int dims = src.channels();//通道</span><br><span class="line">	for (int rows = 0; rows &lt; h; rows++)//两个for遍历图片所有像素</span><br><span class="line">	&#123;</span><br><span class="line">		uchar* current_rows = src.ptr&lt;uchar&gt;(rows);//姑且认为像素指针的储存是连续的</span><br><span class="line">		for (int cols = 0; cols &lt; w; cols++)</span><br><span class="line">		&#123;			</span><br><span class="line">			//dims通道数判断  通道不同返回值不同</span><br><span class="line">			if (dims == 1)//灰度图   通过指针的方式获取像素值   并且   改变像素值</span><br><span class="line">			&#123;</span><br><span class="line">				int pv = *current_rows;</span><br><span class="line">				*current_rows++ = 255 - pv;</span><br><span class="line">			&#125;</span><br><span class="line">			if (dims == 3)//RGB 彩图   通过指针的方式获取像素值   并且   改变像素值(3通道就要执行3次)</span><br><span class="line">			&#123;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;input&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="像素算术法则"><a href="#像素算术法则" class="headerlink" title="像素算术法则"></a>像素算术法则</h2><hr>
+<p>普通的运算法则<br>图像强化…</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	src = src + Scalar(50, 50, 50);//加法/减法/除法 --&gt; +，-，/</span><br><span class="line">	//saturate_cast&lt;uchar&gt;  将范围化成uchar的范围 </span><br><span class="line">	multiply(src, Scalar(20, 20, 20), src);//乘法  越界成255</span><br><span class="line">	add(src, Scalar(20, 20, 20), src);//内置加</span><br><span class="line">	subtract(src, Scalar(20, 20, 20), src);//内置减</span><br><span class="line">	divide(src, Scalar(20, 20, 20), src);//内置除</span><br><span class="line">	imshow(&quot;原&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="创建trackbat调整亮度"><a href="#创建trackbat调整亮度" class="headerlink" title="创建trackbat调整亮度"></a>创建trackbat调整亮度</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//createTrackbar  中我们自己需要的函数</span><br><span class="line">void on_track(int lightness, void* src)</span><br><span class="line">&#123;</span><br><span class="line">	Mat m, dst;</span><br><span class="line">	Mat image = *((Mat*)src);</span><br><span class="line">	m = Mat::zeros(image.size(), image.type());</span><br><span class="line">	dst = Mat::zeros(image.size(), image.type());</span><br><span class="line">	m = Scalar(lightness, lightness, lightness);</span><br><span class="line">	add(image, m, dst);</span><br><span class="line">	//subtract,divide,multiply 都行</span><br><span class="line">	//error:: add(src, m, src) 原图像将会一直累加亮度  需用dst作为新的图  src作为基准</span><br><span class="line">	imshow(&quot;原&quot;, dst);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src;</span><br><span class="line">	int max_value = 100;//最大值</span><br><span class="line">	int lightness = 50;//初始值</span><br><span class="line">	src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	namedWindow(&quot;亮度调整&quot;, WINDOW_AUTOSIZE);//窗口创建</span><br><span class="line">	createTrackbar(&quot;Value Bar&quot;, &quot;亮度调整&quot;, &amp;lightness, max_value, on_track, (void*)(&amp;src));</span><br><span class="line">	on_track(lightness, &amp;src);//回调函数</span><br><span class="line">	//初始值、最大值、自带函数、附加值</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？"><a href="#创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？" class="headerlink" title="创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)"></a>创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)</h3><p>on_track不变  多加一个  on_contrast</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static void on_contrast(int contrast_init, void* src1)</span><br><span class="line">&#123;</span><br><span class="line">	Mat m;</span><br><span class="line">	Mat image = *((Mat*)src1);</span><br><span class="line">	m = Mat::zeros(image.size(), image.type());</span><br><span class="line">	m = Scalar(contrast_init, contrast_init, contrast_init);</span><br><span class="line">	double contrast = contrast_init / 100.0;</span><br><span class="line">	addWeighted(image, contrast, m, 0.0, 0, dst);//融合两张图 image alpha m beta gamma dst</span><br><span class="line">	imshow(&quot;xin&quot;, dst);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	dst = Mat::zeros(src.size(), src.type());</span><br><span class="line">	namedWindow(&quot;亮度与对比度调整&quot;, WINDOW_AUTOSIZE);//窗口创建</span><br><span class="line">	int max_value = 100;//最大值</span><br><span class="line">	int lightness = 50;//初始值</span><br><span class="line">	int contrast_init = 100;</span><br><span class="line">	int contrast_max = 200;</span><br><span class="line">	createTrackbar(&quot;Value Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;lightness, max_value, on_track, (void*)(&amp;src));</span><br><span class="line">	createTrackbar(&quot;Contrast Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;contrast_init, contrast_max, on_contrast, (void*)(&amp;src));</span><br><span class="line">	//初始值、最大值、自带函数、附加值</span><br><span class="line">	on_track(lightness, &amp;src);</span><br><span class="line">	on_contrast(contrast_init, &amp;src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并没什么难理解<br>addWeighted(src1, alpha, src2, beta, gamma, dst)比较特殊  可以线性融合两张图大小要一致</p>
+<table>
+<thead>
+<tr>
+<th align="center">addWeighted参数</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">src1</td>
+<td align="center">第一个原数组</td>
+</tr>
+<tr>
+<td align="center">alpha</td>
+<td align="center">第一个数组元素权重</td>
+</tr>
+<tr>
+<td align="center">src2</td>
+<td align="center">第二个原数组</td>
+</tr>
+<tr>
+<td align="center">beta</td>
+<td align="center">第二个数组元素权重</td>
+</tr>
+<tr>
+<td align="center">gamma</td>
+<td align="center">图一与图二作和后添加的数值</td>
+</tr>
+<tr>
+<td align="center">dst</td>
+<td align="center">输出图片</td>
+</tr>
+</tbody></table>
+<p>融合的功能</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat a;</span><br><span class="line">	Mat b, dst;</span><br><span class="line">	a = imread(&quot;D:/0/173.jpg&quot;);</span><br><span class="line">	b = imread(&quot;D:/0/177.jpg&quot;);</span><br><span class="line">	addWeighted(a, 0.25, b, 0.5, 2, dst);</span><br><span class="line">	imshow(&quot;xin&quot;, dst);</span><br><span class="line">	namedWindow(&quot;xin&quot;, WINDOW_FREERATIO);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+]]></content>
+  </entry>
+</search>
