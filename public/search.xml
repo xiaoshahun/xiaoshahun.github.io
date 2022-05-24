@@ -129,7 +129,7 @@
 </thead>
 <tbody><tr>
 <td align="center">NORM_MINMAX</td>
-<td align="center">$$d s t ( i , j ) = \frac { [ \sec ( i , j ) - m i n ( \sec ( x , y ) ) ] * ( m a x - m i n ) } { m a x ( s r c ( x , y ) ) - m i n } + m i n$$</td>
+<td align="center">$$dst(i,j) = ((src(i,j)-min(src(x,y))))/max(src(x,y))$$</td>
 </tr>
 <tr>
 <td align="center">NORM_INF</td>
