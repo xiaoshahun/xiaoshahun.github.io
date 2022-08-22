@@ -19,35 +19,55 @@
 ]]></content>
   </entry>
   <entry>
+    <title>算法的摆烂日记</title>
+    <url>/2022/05/27/%E7%AE%97%E6%B3%95%E7%9A%84%E6%91%86%E7%83%82%E6%97%A5%E8%AE%B0/</url>
+    <content><![CDATA[<img src="/images/huge.png" width="60%" height="30%" align="center/">
+<span id="more"></span>
+
+<h1 id="ISBN号码"><a href="#ISBN号码" class="headerlink" title="ISBN号码"></a>ISBN号码</h1><hr>
+<p>描述<br>每一本正式出版的图书都有一个ISBN号码与之对应，ISBN码包括9位数字、1位识别码和3位分隔符，其规定格式如“x-xxx-xxxxx-x”，其中符号“-”就是分隔符（键盘上的减号），最后一位是识别码，例如0-670-82162-4就是一个标准的ISBN码。ISBN码的首位数字表示书籍的出版语言，例如0代表英语；第一个分隔符“-”之后的三位数字代表出版社，例如670代表维京出版社；第二个分隔符后的五位数字代表该书在该出版社的编号；最后一位为识别码。</p>
+<p>识别码的计算方法如下：<br>首位数字乘以1加上次位数字乘以2……以此类推，用所得的结果mod 11，所得的余数即为识别码，如果余数为10，则识别码为大写字母X。例如ISBN号码0-670-82162-4中的识别码4是这样得到的：对067082162这9个数字，从左至右，分别乘以1，2，…,9,再求和，即0×1+6×2+……+2×9=158，然后取158 mod 11的结果4作为识别码。</p>
+<p>你的任务是编写程序判断输入的ISBN号码中识别码是否正确，如果正确，则仅输出“Right”；如果错误，则输出你认为是正确的ISBN号码。</p>
+<p>格式<br>输入格式<br>输入只有一行，是一个字符序列，表示一本书的ISBN号码（保证输入符合ISBN号码的格式要求）。</p>
+<p>输出格式<br>输出共一行，假如输入的ISBN号码的识别码正确，那么输出“Right”，否则，按照规定的格式，输出正确的ISBN号码（包括分隔符“-”）。</p>
+<p>样例1<br>样例输入1<br>0-670-82162-4<br>Copy<br>样例输出1<br>Right<br>Copy<br>样例2<br>样例输入2<br>0-670-82162-0<br>Copy<br>样例输出2<br>0-670-82162-4<br>Copy<br>限制<br>各个测试点1s</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string x, x1;</span><br><span class="line">	cin &gt;&gt; x;</span><br><span class="line">	x1 = x;</span><br><span class="line">	x1.erase(1, 1);</span><br><span class="line">	x1.erase(4, 1);//erase(begin,len)去除指定位置字符串</span><br><span class="line">	int nums = 0;</span><br><span class="line">	for (int i = 0; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		nums += (x1[i] - 48) * (i + 1);</span><br><span class="line">	&#125;</span><br><span class="line">	int last_numb = nums % 11;</span><br><span class="line">	if (last_numb == 10)</span><br><span class="line">	&#123;</span><br><span class="line">		if (&#x27;X&#x27; - 48 == x[12] - 48)</span><br><span class="line">			cout &lt;&lt; &quot;Right&quot; &lt;&lt; endl;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			x = x.replace(12, 12, &quot;X&quot;);</span><br><span class="line">			cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	if (last_numb == x[12] - 48)</span><br><span class="line">		cout &lt;&lt; &quot;Right&quot; &lt;&lt; endl;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		x = x.replace(12, 12, to_string(last_numb));//replace(begin,end,replace_string)替换特定位置字符串</span><br><span class="line">		cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PS-这题纯模拟就行，小心大小写！！"><a href="#PS-这题纯模拟就行，小心大小写！！" class="headerlink" title="PS:这题纯模拟就行，小心大小写！！"></a>PS:这题纯模拟就行，小心大小写！！</h2>]]></content>
+      <categories>
+        <category>算法的小小学习计划</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>小傻混的OPENCV摆烂日记</title>
     <url>/2022/05/20/%E5%B0%8F%E5%82%BB%E6%B7%B7%E7%9A%84OPENCV%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/</url>
-    <content><![CDATA[<p><img src="/images/huge.png" width="60%" height="30%" align="center/"><br><span id="more"></span></p>
+    <content><![CDATA[<img src="/images/huge.png" width="60%" height="30%" align="center/">
+<span id="more"></span>
+
 <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><hr>
 <h2 id="imread-amp-amp-imshow"><a href="#imread-amp-amp-imshow" class="headerlink" title="imread &amp;&amp; imshow"></a>imread &amp;&amp; imshow</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;opencv2/opencv.hpp&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;, IMREAD_GRAYSCALE);//读图片  第二个参数为色彩</span><br><span class="line">	if (src.empty())//判断图像是否读取成功</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;no image&quot; &lt;&lt; endl;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	namedWindow(&quot;input&quot;, WINDOW_FREERATIO);//自由拉伸窗口</span><br><span class="line">	imshow(&quot;input&quot;, src);//只支持256色8位，浮动</span><br><span class="line">	waitKey(0);//0为停止  其余数字停顿x毫秒</span><br><span class="line">	destroyAllWindows();//销毁之前窗口</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">imread第二参数</th>
-<th style="text-align:center">作用</th>
+<th align="center">imread第二参数</th>
+<th align="center">作用</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">IMREAD_ANYCOLOR</td>
-<td style="text-align:center">彩色图像</td>
+<tbody><tr>
+<td align="center">IMREAD_ANYCOLOR</td>
+<td align="center">彩色图像</td>
 </tr>
 <tr>
-<td style="text-align:center">IMREAD_ANYDEPTH</td>
-<td style="text-align:center">任意深度图像</td>
+<td align="center">IMREAD_ANYDEPTH</td>
+<td align="center">任意深度图像</td>
 </tr>
 <tr>
-<td style="text-align:center">IMREAD_GRAYSCALE</td>
-<td style="text-align:center">灰度图</td>
+<td align="center">IMREAD_GRAYSCALE</td>
+<td align="center">灰度图</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p><em>imshow 不能超过640x640</em><br><em>imread 读取路径不能有空格要跟名字完全一致</em></p>
 <hr>
 <h2 id="imwrite-amp-amp-图像格式转换"><a href="#imwrite-amp-amp-图像格式转换" class="headerlink" title="imwrite &amp;&amp; 图像格式转换"></a>imwrite &amp;&amp; 图像格式转换</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void colorSpace(Mat&amp; image)</span><br><span class="line">&#123;</span><br><span class="line">	Mat gray, hsv;</span><br><span class="line">	cvtColor(image, hsv, COLOR_BGR2HSV);//hsv图像为image（BGR）图像hsv转换后的图像</span><br><span class="line">    //H(0~180)(颜色) S(饱和度) V(亮度)</span><br><span class="line">	cvtColor(image, gray, COLOR_BGR2GRAY);//gray图像为image图像的灰度图</span><br><span class="line">	imwrite(&quot;D:/0/gray.jpg&quot;, gray);//保存图像至D:/0/gray.jpg</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -55,55 +75,57 @@
 <hr>
 <h2 id="图像像素的读取和操作"><a href="#图像像素的读取和操作" class="headerlink" title="图像像素的读取和操作"></a>图像像素的读取和操作</h2><p>对图像的操作索引有两种方式：row and col ； 指针索引<br>dims不同返回的值的格式也不同</p>
 <h3 id="行列索引"><a href="#行列索引" class="headerlink" title="行列索引"></a>行列索引</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	int w = src.cols;//宽</span><br><span class="line">	int h = src.rows;//高</span><br><span class="line">	int dims = src.channels();//通道</span><br><span class="line">	//根据row  and  col来索引</span><br><span class="line">	for (int rows = 0; rows &lt; h; rows++)//两个for遍历图片所有像素</span><br><span class="line">	&#123;</span><br><span class="line">		for (int cols = 0; cols &lt; w; cols++)</span><br><span class="line">		&#123;</span><br><span class="line">			//dims通道数判断  通道不同返回值不同</span><br><span class="line">			if (dims == 1)//灰度图</span><br><span class="line">			&#123;</span><br><span class="line">				int pv = src.at&lt;uchar&gt;(rows, cols);//像素读取</span><br><span class="line">				src.at&lt;uchar&gt;(rows, cols) = 255 - pv;//像素改写</span><br><span class="line">			&#125;</span><br><span class="line">			if (dims == 3)//RGB 彩图</span><br><span class="line">			&#123;</span><br><span class="line">				Vec3b bgr = src.at&lt;Vec3b&gt;(rows, cols);</span><br><span class="line">				//像素读取   3通道  一个像素  3个值    Vec3b类似于int数组</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows,cols)[0] = 255 - bgr[0];//像素改写</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows, cols)[1] = 255 - bgr[1];</span><br><span class="line">				src.at&lt;Vec3b&gt;(rows, cols)[2] = 255 - bgr[2];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;input&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="指针索引"><a href="#指针索引" class="headerlink" title="指针索引"></a>指针索引</h3><p>相较于 row和col的索引<br>指针索引效率更高  但如果不仔细指针所带来的问题难以发现<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	int w = src.cols;//宽</span><br><span class="line">	int h = src.rows;//高</span><br><span class="line">	int dims = src.channels();//通道</span><br><span class="line">	for (int rows = 0; rows &lt; h; rows++)//两个for遍历图片所有像素</span><br><span class="line">	&#123;</span><br><span class="line">		uchar* current_rows = src.ptr&lt;uchar&gt;(rows);//姑且认为像素指针的储存是连续的</span><br><span class="line">		for (int cols = 0; cols &lt; w; cols++)</span><br><span class="line">		&#123;			</span><br><span class="line">			//dims通道数判断  通道不同返回值不同</span><br><span class="line">			if (dims == 1)//灰度图   通过指针的方式获取像素值   并且   改变像素值</span><br><span class="line">			&#123;</span><br><span class="line">				int pv = *current_rows;</span><br><span class="line">				*current_rows++ = 255 - pv;</span><br><span class="line">			&#125;</span><br><span class="line">			if (dims == 3)//RGB 彩图   通过指针的方式获取像素值   并且   改变像素值(3通道就要执行3次)</span><br><span class="line">			&#123;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;input&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="指针索引"><a href="#指针索引" class="headerlink" title="指针索引"></a>指针索引</h3><p>相较于 row和col的索引<br>指针索引效率更高  但如果不仔细指针所带来的问题难以发现</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	int w = src.cols;//宽</span><br><span class="line">	int h = src.rows;//高</span><br><span class="line">	int dims = src.channels();//通道</span><br><span class="line">	for (int rows = 0; rows &lt; h; rows++)//两个for遍历图片所有像素</span><br><span class="line">	&#123;</span><br><span class="line">		uchar* current_rows = src.ptr&lt;uchar&gt;(rows);//姑且认为像素指针的储存是连续的</span><br><span class="line">		for (int cols = 0; cols &lt; w; cols++)</span><br><span class="line">		&#123;			</span><br><span class="line">			//dims通道数判断  通道不同返回值不同</span><br><span class="line">			if (dims == 1)//灰度图   通过指针的方式获取像素值   并且   改变像素值</span><br><span class="line">			&#123;</span><br><span class="line">				int pv = *current_rows;</span><br><span class="line">				*current_rows++ = 255 - pv;</span><br><span class="line">			&#125;</span><br><span class="line">			if (dims == 3)//RGB 彩图   通过指针的方式获取像素值   并且   改变像素值(3通道就要执行3次)</span><br><span class="line">			&#123;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">				*current_rows++ = 255 - *current_rows;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;input&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="像素算术法则"><a href="#像素算术法则" class="headerlink" title="像素算术法则"></a>像素算术法则</h2><p>普通的运算法则<br>图像强化…<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	src = src + Scalar(50, 50, 50);//加法/减法/除法 --&gt; +，-，/</span><br><span class="line">	//saturate_cast&lt;uchar&gt;  将范围化成uchar的范围 </span><br><span class="line">	multiply(src, Scalar(20, 20, 20), src);//乘法  越界成255</span><br><span class="line">	add(src, Scalar(20, 20, 20), src);//内置加</span><br><span class="line">	subtract(src, Scalar(20, 20, 20), src);//内置减</span><br><span class="line">	divide(src, Scalar(20, 20, 20), src);//内置除</span><br><span class="line">	imshow(&quot;原&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="像素算术法则"><a href="#像素算术法则" class="headerlink" title="像素算术法则"></a>像素算术法则</h2><p>普通的运算法则<br>图像强化…</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	src = src + Scalar(50, 50, 50);//加法/减法/除法 --&gt; +，-，/</span><br><span class="line">	//saturate_cast&lt;uchar&gt;  将范围化成uchar的范围 </span><br><span class="line">	multiply(src, Scalar(20, 20, 20), src);//乘法  越界成255</span><br><span class="line">	add(src, Scalar(20, 20, 20), src);//内置加</span><br><span class="line">	subtract(src, Scalar(20, 20, 20), src);//内置减</span><br><span class="line">	divide(src, Scalar(20, 20, 20), src);//内置除</span><br><span class="line">	imshow(&quot;原&quot;, src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="创建trackbat调整亮度"><a href="#创建trackbat调整亮度" class="headerlink" title="创建trackbat调整亮度"></a>创建trackbat调整亮度</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//createTrackbar  中我们自己需要的函数</span><br><span class="line">void on_track(int lightness, void* src)</span><br><span class="line">&#123;</span><br><span class="line">	Mat m, dst;</span><br><span class="line">	Mat image = *((Mat*)src);</span><br><span class="line">	m = Mat::zeros(image.size(), image.type());</span><br><span class="line">	dst = Mat::zeros(image.size(), image.type());</span><br><span class="line">	m = Scalar(lightness, lightness, lightness);</span><br><span class="line">	add(image, m, dst);</span><br><span class="line">	//subtract,divide,multiply 都行</span><br><span class="line">	//error:: add(src, m, src) 原图像将会一直累加亮度  需用dst作为新的图  src作为基准</span><br><span class="line">	imshow(&quot;原&quot;, dst);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src;</span><br><span class="line">	int max_value = 100;//最大值</span><br><span class="line">	int lightness = 50;//初始值</span><br><span class="line">	src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	namedWindow(&quot;亮度调整&quot;, WINDOW_AUTOSIZE);//窗口创建</span><br><span class="line">	createTrackbar(&quot;Value Bar&quot;, &quot;亮度调整&quot;, &amp;lightness, max_value, on_track, (void*)(&amp;src));</span><br><span class="line">	on_track(lightness, &amp;src);//回调函数</span><br><span class="line">	//初始值、最大值、自带函数、附加值</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？"><a href="#创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？" class="headerlink" title="创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)"></a>创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)</h3><p>on_track不变  多加一个  on_contrast<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static void on_contrast(int contrast_init, void* src1)</span><br><span class="line">&#123;</span><br><span class="line">	Mat m;</span><br><span class="line">	Mat image = *((Mat*)src1);</span><br><span class="line">	m = Mat::zeros(image.size(), image.type());</span><br><span class="line">	m = Scalar(contrast_init, contrast_init, contrast_init);</span><br><span class="line">	double contrast = contrast_init / 100.0;</span><br><span class="line">	addWeighted(image, contrast, m, 0.0, 0, dst);//融合两张图 image alpha m beta gamma dst</span><br><span class="line">	imshow(&quot;xin&quot;, dst);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	dst = Mat::zeros(src.size(), src.type());</span><br><span class="line">	namedWindow(&quot;亮度与对比度调整&quot;, WINDOW_AUTOSIZE);//窗口创建</span><br><span class="line">	int max_value = 100;//最大值</span><br><span class="line">	int lightness = 50;//初始值</span><br><span class="line">	int contrast_init = 100;</span><br><span class="line">	int contrast_max = 200;</span><br><span class="line">	createTrackbar(&quot;Value Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;lightness, max_value, on_track, (void*)(&amp;src));</span><br><span class="line">	createTrackbar(&quot;Contrast Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;contrast_init, contrast_max, on_contrast, (void*)(&amp;src));</span><br><span class="line">	//初始值、最大值、自带函数、附加值</span><br><span class="line">	on_track(lightness, &amp;src);</span><br><span class="line">	on_contrast(contrast_init, &amp;src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>并没什么难理解<br>addWeighted(src1, alpha, src2, beta, gamma, dst)比较特殊  可以线性融合两张图大小要一致</p>
-<div class="table-container">
+<h3 id="创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？"><a href="#创建on-track调整亮度-amp-amp-on-contrast调整对比度-不知道为什么-各玩各的？？？？" class="headerlink" title="创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)"></a>创建on_track调整亮度 &amp;&amp; on_contrast调整对比度(不知道为什么 各玩各的？？？？)</h3><p>on_track不变  多加一个  on_contrast</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static void on_contrast(int contrast_init, void* src1)</span><br><span class="line">&#123;</span><br><span class="line">	Mat m;</span><br><span class="line">	Mat image = *((Mat*)src1);</span><br><span class="line">	m = Mat::zeros(image.size(), image.type());</span><br><span class="line">	m = Scalar(contrast_init, contrast_init, contrast_init);</span><br><span class="line">	double contrast = contrast_init / 100.0;</span><br><span class="line">	addWeighted(image, contrast, m, 0.0, 0, dst);//融合两张图 image alpha m beta gamma dst</span><br><span class="line">	imshow(&quot;xin&quot;, dst);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	src = imread(&quot;D:/0/2.jpg&quot;);</span><br><span class="line">	dst = Mat::zeros(src.size(), src.type());</span><br><span class="line">	namedWindow(&quot;亮度与对比度调整&quot;, WINDOW_AUTOSIZE);//窗口创建</span><br><span class="line">	int max_value = 100;//最大值</span><br><span class="line">	int lightness = 50;//初始值</span><br><span class="line">	int contrast_init = 100;</span><br><span class="line">	int contrast_max = 200;</span><br><span class="line">	createTrackbar(&quot;Value Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;lightness, max_value, on_track, (void*)(&amp;src));</span><br><span class="line">	createTrackbar(&quot;Contrast Bar&quot;, &quot;亮度与对比度调整&quot;, &amp;contrast_init, contrast_max, on_contrast, (void*)(&amp;src));</span><br><span class="line">	//初始值、最大值、自带函数、附加值</span><br><span class="line">	on_track(lightness, &amp;src);</span><br><span class="line">	on_contrast(contrast_init, &amp;src);</span><br><span class="line">	waitKey(0);	</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并没什么难理解<br>addWeighted(src1, alpha, src2, beta, gamma, dst)比较特殊  可以线性融合两张图大小要一致</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">addWeighted参数</th>
-<th style="text-align:center">作用</th>
+<th align="center">addWeighted参数</th>
+<th align="center">作用</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">src1</td>
-<td style="text-align:center">第一个原数组</td>
+<tbody><tr>
+<td align="center">src1</td>
+<td align="center">第一个原数组</td>
 </tr>
 <tr>
-<td style="text-align:center">alpha</td>
-<td style="text-align:center">第一个数组元素权重</td>
+<td align="center">alpha</td>
+<td align="center">第一个数组元素权重</td>
 </tr>
 <tr>
-<td style="text-align:center">src2</td>
-<td style="text-align:center">第二个原数组</td>
+<td align="center">src2</td>
+<td align="center">第二个原数组</td>
 </tr>
 <tr>
-<td style="text-align:center">beta</td>
-<td style="text-align:center">第二个数组元素权重</td>
+<td align="center">beta</td>
+<td align="center">第二个数组元素权重</td>
 </tr>
 <tr>
-<td style="text-align:center">gamma</td>
-<td style="text-align:center">图一与图二作和后添加的数值</td>
+<td align="center">gamma</td>
+<td align="center">图一与图二作和后添加的数值</td>
 </tr>
 <tr>
-<td style="text-align:center">dst</td>
-<td style="text-align:center">输出图片</td>
+<td align="center">dst</td>
+<td align="center">输出图片</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <hr>
 <h2 id="融合的功能"><a href="#融合的功能" class="headerlink" title="融合的功能"></a>融合的功能</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat a;</span><br><span class="line">	Mat b, dst;</span><br><span class="line">	a = imread(&quot;D:/0/173.jpg&quot;);</span><br><span class="line">	b = imread(&quot;D:/0/177.jpg&quot;);</span><br><span class="line">	addWeighted(a, 0.25, b, 0.5, 2, dst);</span><br><span class="line">	imshow(&quot;xin&quot;, dst);</span><br><span class="line">	namedWindow(&quot;xin&quot;, WINDOW_FREERATIO);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="伪色彩增强"><a href="#伪色彩增强" class="headerlink" title="伪色彩增强"></a>伪色彩增强</h2><p>可以给灰度图伪上色<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src, dst;</span><br><span class="line">	src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	dst = Mat::zeros(src.size(), src.type());</span><br><span class="line">	applyColorMap(src, dst, COLORMAP_AUTUMN);// 第三个参数为枚举类型</span><br><span class="line">	imshow(&quot;原图&quot;, src);</span><br><span class="line">	imshow(&quot;新图&quot;, dst);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="伪色彩增强"><a href="#伪色彩增强" class="headerlink" title="伪色彩增强"></a>伪色彩增强</h2><p>可以给灰度图伪上色</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src, dst;</span><br><span class="line">	src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	dst = Mat::zeros(src.size(), src.type());</span><br><span class="line">	applyColorMap(src, dst, COLORMAP_AUTUMN);// 第三个参数为枚举类型</span><br><span class="line">	imshow(&quot;原图&quot;, src);</span><br><span class="line">	imshow(&quot;新图&quot;, dst);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="图像像素的逻辑操作"><a href="#图像像素的逻辑操作" class="headerlink" title="图像像素的逻辑操作"></a>图像像素的逻辑操作</h2><p>与、或、非的操作<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat m1 = Mat::zeros(Size(256, 256),CV_8UC3);</span><br><span class="line">	Mat m2 = Mat::zeros(Size(256, 256), CV_8UC3);</span><br><span class="line">	//rectangle(image, Rect(), Scarlar(), thickness, linetype, 0);</span><br><span class="line">	//rect(x, y, width, height)</span><br><span class="line">	rectangle(m1, Rect(100, 100, 80, 80), Scalar(255, 255, 0), -1, LINE_8, 0);</span><br><span class="line">	rectangle(m2, Rect(100, 100, 80, 80), Scalar(255, 0, 255), -1, LINE_8, 0);</span><br><span class="line">	//在图像中对像素点操作</span><br><span class="line">	//imshow(&quot;m1&quot;, m1);</span><br><span class="line">	Mat m3;</span><br><span class="line">	bitwise_and(m1, m2, m3);//与操作 图像都1的地方</span><br><span class="line">	//bitwise_or(m1, m2, m3);//或操作  图像有1的东方</span><br><span class="line">	//bitwise_not(m1, m3);//非操作 ~也是取非操作</span><br><span class="line">	//bitwise_xor(m1, m2, m3);//异或操作  且的位置取反</span><br><span class="line">	imshow(&quot;m3&quot;, m3);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="图像像素的逻辑操作"><a href="#图像像素的逻辑操作" class="headerlink" title="图像像素的逻辑操作"></a>图像像素的逻辑操作</h2><p>与、或、非的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat m1 = Mat::zeros(Size(256, 256),CV_8UC3);</span><br><span class="line">	Mat m2 = Mat::zeros(Size(256, 256), CV_8UC3);</span><br><span class="line">	//rectangle(image, Rect(), Scarlar(), thickness, linetype, 0);</span><br><span class="line">	//rect(x, y, width, height)</span><br><span class="line">	rectangle(m1, Rect(100, 100, 80, 80), Scalar(255, 255, 0), -1, LINE_8, 0);</span><br><span class="line">	rectangle(m2, Rect(100, 100, 80, 80), Scalar(255, 0, 255), -1, LINE_8, 0);</span><br><span class="line">	//在图像中对像素点操作</span><br><span class="line">	//imshow(&quot;m1&quot;, m1);</span><br><span class="line">	Mat m3;</span><br><span class="line">	bitwise_and(m1, m2, m3);//与操作 图像都1的地方</span><br><span class="line">	//bitwise_or(m1, m2, m3);//或操作  图像有1的东方</span><br><span class="line">	//bitwise_not(m1, m3);//非操作 ~也是取非操作</span><br><span class="line">	//bitwise_xor(m1, m2, m3);//异或操作  且的位置取反</span><br><span class="line">	imshow(&quot;m3&quot;, m3);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="通道的分离和融合"><a href="#通道的分离和融合" class="headerlink" title="通道的分离和融合"></a>通道的分离和融合</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	vector&lt;Mat&gt; mv;//Mat类型的容器</span><br><span class="line">	split(src, mv);//分离彩色图像的 R G B 通道</span><br><span class="line">	imshow(&quot;蓝色&quot;, mv[0]);</span><br><span class="line">	imshow(&quot;绿色&quot;, mv[1]);</span><br><span class="line">	imshow(&quot;黄色&quot;, mv[2]);</span><br><span class="line"></span><br><span class="line">	//将G B通道置0 融合到新图像中 就可以仅显示单色图像</span><br><span class="line">	Mat dst;</span><br><span class="line">	mv[1] = 0;</span><br><span class="line">	mv[2] = 0;</span><br><span class="line">	merge(mv, dst);//融合分离的图像</span><br><span class="line">	imshow(&quot;蓝&quot;, dst);</span><br><span class="line">	int from_to[] = &#123; 0, 2, 1, 1, 2, 0 &#125;;//偶数下标的用来标识输入矩阵，奇数下标的用来标识输出矩阵。若是偶数下标为负数，那么相应的输出矩阵为零矩阵。</span><br><span class="line">	mixChannels(&amp;src, 1, &amp;dst, 1, from_to, 3);//通道混合</span><br><span class="line">	//输入矩阵的向量(相同大小和深度)， 输入矩阵的个数， 输出矩阵的向量(事先分配空间)， 输出矩阵个数， 序号对向量， 序号对数</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
@@ -114,69 +136,79 @@
 <hr>
 <h2 id="几何图像绘制"><a href="#几何图像绘制" class="headerlink" title="几何图像绘制"></a>几何图像绘制</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//几何图像绘制</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Rect rect;</span><br><span class="line">	rect.x = 100;</span><br><span class="line">	rect.y = 100;//左上角</span><br><span class="line">	rect.width = 200;</span><br><span class="line">	rect.height = 200;//右下角</span><br><span class="line">	Mat m1 = Mat::zeros(src.size(), src.type());</span><br><span class="line">	rectangle(m1, rect, Scalar(255, 0, 0), -1, 8);//画矩阵</span><br><span class="line">	//在input上画Point的形状，颜色为Scalar，-1代表填充,8代表线型</span><br><span class="line">	circle(m1, Point(100, 100), 15, Scalar(0, 255, 0), 3, 8);//画圆</span><br><span class="line">	//在input上画Point的形状，圆半径，颜色，线长，线型</span><br><span class="line">	line(m1, Point(100, 100), Point(200, 200), Scalar(0, 0, 255), 3, 8);//画线</span><br><span class="line">	//在input上画线，起点，终点，颜色，线宽，线型</span><br><span class="line">	RotatedRect rrt;</span><br><span class="line">	rrt.center = Point(200, 200);//圆心</span><br><span class="line">	rrt.size = Size(300, 150);//长径，短径</span><br><span class="line">	rrt.angle = 5.0;//旋转角度  逆时针</span><br><span class="line">	ellipse(src, rrt, Scalar(255, 255, 0), 2, 8);</span><br><span class="line">	Mat dst;</span><br><span class="line">	addWeighted(src, 0.7, m1, 0.6, 2, dst);</span><br><span class="line">	imshow(&quot;1&quot;, dst);</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="随机"><a href="#随机" class="headerlink" title="随机"></a>随机</h2><p>我感觉RNG rng()是伪随机？？？？？<br>得在参数加入系统时间才能做到真随机<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//随机</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat m1 = Mat::zeros(Size(512, 512), CV_8UC3);</span><br><span class="line">	int w = m1.cols;</span><br><span class="line">	int h = m1.rows;</span><br><span class="line">	RNG rng(12345);//伪随机</span><br><span class="line">	//RNG rng((unsigned)time(NULL));//真随机</span><br><span class="line">	int x1, x2, y1, y2;</span><br><span class="line">	for (int i = 0;; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		x1 = rng.uniform(0, w);//随机产生0-w之间的数</span><br><span class="line">		y1 = rng.uniform(0, h);</span><br><span class="line">		x2 = rng.uniform(0, w);</span><br><span class="line">		y2 = rng.uniform(0, h);</span><br><span class="line">		line(m1, Point(x1, y1), Point(x2, y2), Scalar(rng.uniform(0, 255),</span><br><span class="line">			rng.uniform(0, 255), rng.uniform(0, 255)), 3, 8);</span><br><span class="line">		if (i == 10)</span><br><span class="line">		&#123;</span><br><span class="line">			m1 = Scalar(0, 0, 0);</span><br><span class="line">		&#125;</span><br><span class="line">		imshow(&quot;1&quot;, m1);</span><br><span class="line">		waitKey(1000);</span><br><span class="line">	&#125;</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="随机"><a href="#随机" class="headerlink" title="随机"></a>随机</h2><p>我感觉RNG rng()是伪随机？？？？？<br>得在参数加入系统时间才能做到真随机</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//随机</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat m1 = Mat::zeros(Size(512, 512), CV_8UC3);</span><br><span class="line">	int w = m1.cols;</span><br><span class="line">	int h = m1.rows;</span><br><span class="line">	RNG rng(12345);//伪随机</span><br><span class="line">	//RNG rng((unsigned)time(NULL));//真随机</span><br><span class="line">	int x1, x2, y1, y2;</span><br><span class="line">	for (int i = 0;; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		x1 = rng.uniform(0, w);//随机产生0-w之间的数</span><br><span class="line">		y1 = rng.uniform(0, h);</span><br><span class="line">		x2 = rng.uniform(0, w);</span><br><span class="line">		y2 = rng.uniform(0, h);</span><br><span class="line">		line(m1, Point(x1, y1), Point(x2, y2), Scalar(rng.uniform(0, 255),</span><br><span class="line">			rng.uniform(0, 255), rng.uniform(0, 255)), 3, 8);</span><br><span class="line">		if (i == 10)</span><br><span class="line">		&#123;</span><br><span class="line">			m1 = Scalar(0, 0, 0);</span><br><span class="line">		&#125;</span><br><span class="line">		imshow(&quot;1&quot;, m1);</span><br><span class="line">		waitKey(1000);</span><br><span class="line">	&#125;</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="多边形绘制-amp-填充"><a href="#多边形绘制-amp-填充" class="headerlink" title="多边形绘制 &amp; 填充"></a>多边形绘制 &amp; 填充</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//多边形的小故事</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat m1 = Mat::zeros(Size(512, 512), CV_8UC3);</span><br><span class="line">	Point p1(100, 100);</span><br><span class="line">	Point p2(350, 100);</span><br><span class="line">	Point p3(450, 280);</span><br><span class="line">	Point p4(320, 450);</span><br><span class="line">	Point p5(80, 400);</span><br><span class="line">	vector&lt;Point&gt;pts;</span><br><span class="line">	pts.push_back(p1);</span><br><span class="line">	pts.push_back(p2);</span><br><span class="line">	pts.push_back(p3);</span><br><span class="line">	pts.push_back(p4);</span><br><span class="line">	pts.push_back(p5);</span><br><span class="line">	//fillPoly(m1, pts, Scalar(0, 255, 255), 8, 0);//不知道为什么报错</span><br><span class="line">	polylines(m1, pts, true, Scalar(255, 0, 0), 3, 8, 0);//画多边形</span><br><span class="line">	//底图，Point容器，是否封闭，颜色，线宽，线型，相对位移(原点)</span><br><span class="line">	vector&lt;vector&lt;Point&gt;&gt;contours;//这玩意有点逆天</span><br><span class="line">	contours.push_back(pts);</span><br><span class="line">	drawContours(m1, contours, 0, Scalar(0, 255, 255), -1);</span><br><span class="line">	//input, vector类型的vector, 画第几个多边形，颜色, 线宽（填充）</span><br><span class="line">	imshow(&quot;1&quot;, m1);</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="归一化？！！！"><a href="#归一化？！！！" class="headerlink" title="归一化？！！！"></a>归一化？！！！</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//归一化！！！！！！！！！</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat dst;</span><br><span class="line">	src.convertTo(src, CV_32F);//将src变为浮点型</span><br><span class="line">	normalize(src, dst, 0, 1.0, NORM_MINMAX);</span><br><span class="line">	//InputArray, OutputArray, alpha, beta, norm_type(归一化方式), dtype(与InputArray类型一直), mask</span><br><span class="line">	//cout &lt;&lt; src.type() &lt;&lt; endl;</span><br><span class="line">	//cout &lt;&lt; dst.type() &lt;&lt; endl;</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	imshow(&quot;1&quot;, src);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="table-container">
+
 <table>
 <thead>
 <tr>
-<th style="text-align:center">Opencv中的归一化</th>
-<th style="text-align:center">方式</th>
+<th align="center">Opencv中的归一化</th>
+<th align="center">方式</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">NORM_MINMAX</td>
-<td style="text-align:center"><script type="math/tex">dst ( i , j ) = \frac { [ src ( i , j ) - m i n ( src ( x , y ) ) ] * ( m a x - m i n ) } { m a x ( s r c ( x , y ) ) - m i n ( s r c ( x , y ) ) } + m i n</script></td>
+<tbody><tr>
+<td align="center">NORM_MINMAX</td>
+<td align="center">$$dst ( i , j ) = \frac { [ src ( i , j ) - m i n ( src ( x , y ) ) ] * ( m a x - m i n ) } { m a x ( s r c ( x , y ) ) - m i n ( s r c ( x , y ) ) } + m i n$$</td>
 </tr>
 <tr>
-<td style="text-align:center">NORM_INF</td>
-<td style="text-align:center"><script type="math/tex">d s t( i , j ) = \frac { src ( i , j ) } { M a x \vert src ( x , y ) \vert }</script></td>
+<td align="center">NORM_INF</td>
+<td align="center">$$d s t( i , j ) = \frac { src ( i , j ) } { M a x \vert src ( x , y ) \vert }$$</td>
 </tr>
 <tr>
-<td style="text-align:center">NORM_L1</td>
-<td style="text-align:center"><script type="math/tex">d s t ( i , j ) = \frac { src ( i , j ) } { \vert{\sum src ( x , y )}\vert}</script></td>
+<td align="center">NORM_L1</td>
+<td align="center">$$d s t ( i , j ) = \frac { src ( i , j ) } { \vert{\sum src ( x , y )}\vert}$$</td>
 </tr>
 <tr>
-<td style="text-align:center">NORM_L2</td>
-<td style="text-align:center"><script type="math/tex">d s t ( i , j ) = \frac { src ( i , j ) } { \sqrt { \sum src ( x , y ) ^ 2 } }</script></td>
+<td align="center">NORM_L2</td>
+<td align="center">$$d s t ( i , j ) = \frac { src ( i , j ) } { \sqrt { \sum src ( x , y ) ^ 2 } }$$</td>
 </tr>
-</tbody>
-</table>
-</div>
-<p>NORM_L2 仅有alpha<br>NORM_MINMAX alpha为下限，beta为上限并只在NORM_MINMAX中起作用<br>dtype 当为负，输出在大小深度通道数都等于输入，当为正，输出只在深度与输如不同，不同 的地方由dtype决定；<br>mark 掩码。选择感兴趣区域，选定后只能对该区域进行操作。</p>
+<tr>
+<td align="center">NORM_L2 仅有alpha</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">NORM_MINMAX alpha为下限，beta为上限并只在NORM_MINMAX中起作用</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">dtype 当为负，输出在大小深度通道数都等于输入，当为正，输出只在深度与输如不同，不同 的地方由dtype决定；</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">mark 掩码。选择感兴趣区域，选定后只能对该区域进行操作。</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
 <hr>
 <h2 id="图像的放缩-amp-差值"><a href="#图像的放缩-amp-差值" class="headerlink" title="图像的放缩 &amp; 差值"></a>图像的放缩 &amp; 差值</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//差值</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat zoomin, zoomout;</span><br><span class="line">	int h = src.rows;</span><br><span class="line">	int w = src.cols;</span><br><span class="line">	resize(src, zoomin, Size(w / 2, h / 2), 0, 0, INTER_LINEAR);</span><br><span class="line">	// 输入，输出，变化大小，按x，y倍数放缩，变换方式</span><br><span class="line">	//system(&quot;pause&quot;);</span><br><span class="line">	imshow(&quot;1&quot;, zoomin);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:center">差值方法</th>
+<th align="center">代码</th>
+<th align="center">差值方法</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">INTER_NEAREST</td>
-<td style="text-align:center"></td>
+<tbody><tr>
+<td align="center">INTER_NEAREST</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">INTER_LINEAR</td>
-<td style="text-align:center"></td>
+<td align="center">INTER_LINEAR</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">INTER_CUBIC</td>
-<td style="text-align:center"></td>
+<td align="center">INTER_CUBIC</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">INTER_LANCZOS4</td>
+<td align="center">INTER_LANCZOS4</td>
+<td align="center"></td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <hr>
 <h2 id="图像翻转"><a href="#图像翻转" class="headerlink" title="图像翻转"></a>图像翻转</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//翻转</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat dst;</span><br><span class="line">	flip(src, dst, 0);</span><br><span class="line">	//input, output,0(上下翻转)、-1(180°旋转)、1(左右翻转)</span><br><span class="line">	imshow(&quot;1&quot;, dst);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">//旋转</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat src = imread(&quot;D:/0/smartAuto/ole_image/0.jpg&quot;);</span><br><span class="line">	Mat dst, M, dst1;</span><br><span class="line">	int w = src.cols;</span><br><span class="line">	int h = src.rows;</span><br><span class="line">	M = getRotationMatrix2D(Point(w/2,h/2),15,1.0);</span><br><span class="line">	//中心位置,旋转角度, 图像本身像素</span><br><span class="line">	//旋转后大小为 cos * w + sin * h,sin * w + cos * h;</span><br><span class="line">	double cos = abs(M.at&lt;double&gt;(0, 0));</span><br><span class="line">	double sin = abs(M.at&lt;double&gt;(0, 1));</span><br><span class="line">	warpAffine(src, dst1, M, src.size(), INTER_LINEAR, 0);</span><br><span class="line">	int nw = cos * w + sin * h;//需要更新 新图像大小</span><br><span class="line">	int nh = sin * w + cos * h;</span><br><span class="line">	M.at&lt;double&gt;(0, 2) += (nw / 2 - w / 2);//X方向偏移量</span><br><span class="line">	M.at&lt;double&gt;(1, 2) += (nh / 2 - h / 2);//Y方向偏移量</span><br><span class="line">	warpAffine(src, dst, M, Size(nw, nh), INTER_LINEAR, 0);</span><br><span class="line">	</span><br><span class="line">	//Input, Output, 变换矩阵, size, 差值, 边缘处理, 颜色 </span><br><span class="line">	imshow(&quot;1&quot;, dst);</span><br><span class="line">	imshow(&quot;2&quot;, dst1);</span><br><span class="line">	waitKey(0);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
