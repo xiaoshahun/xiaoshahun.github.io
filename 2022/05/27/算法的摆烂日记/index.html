@@ -86,7 +86,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/images/huge.png">
 <meta property="article:published_time" content="2022-05-27T12:22:47.000Z">
-<meta property="article:modified_time" content="2022-08-22T19:41:03.973Z">
+<meta property="article:modified_time" content="2022-08-22T19:42:26.739Z">
 <meta property="article:author" content="Xiaoshuahun">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -387,7 +387,9 @@
 <p>输出格式<br>输出共一行，假如输入的ISBN号码的识别码正确，那么输出“Right”，否则，按照规定的格式，输出正确的ISBN号码（包括分隔符“-”）。</p>
 <p>样例1<br>样例输入1<br>0-670-82162-4<br>Copy<br>样例输出1<br>Right<br>Copy<br>样例2<br>样例输入2<br>0-670-82162-0<br>Copy<br>样例输出2<br>0-670-82162-4<br>Copy<br>限制<br>各个测试点1s</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	string x, x1;</span><br><span class="line">	cin &gt;&gt; x;</span><br><span class="line">	x1 = x;</span><br><span class="line">	x1.erase(1, 1);</span><br><span class="line">	x1.erase(4, 1);//erase(begin,len)去除指定位置字符串</span><br><span class="line">	int nums = 0;</span><br><span class="line">	for (int i = 0; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		nums += (x1[i] - 48) * (i + 1);</span><br><span class="line">	&#125;</span><br><span class="line">	int last_numb = nums % 11;</span><br><span class="line">	if (last_numb == 10)</span><br><span class="line">	&#123;</span><br><span class="line">		if (&#x27;X&#x27; - 48 == x[12] - 48)</span><br><span class="line">			cout &lt;&lt; &quot;Right&quot; &lt;&lt; endl;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			x = x.replace(12, 12, &quot;X&quot;);</span><br><span class="line">			cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	if (last_numb == x[12] - 48)</span><br><span class="line">		cout &lt;&lt; &quot;Right&quot; &lt;&lt; endl;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		x = x.replace(12, 12, to_string(last_numb));//replace(begin,end,replace_string)替换特定位置字符串</span><br><span class="line">		cout &lt;&lt; x &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="PS-这题纯模拟就行，小心大小写！！"><a href="#PS-这题纯模拟就行，小心大小写！！" class="headerlink" title="PS:这题纯模拟就行，小心大小写！！"></a>PS:这题纯模拟就行，小心大小写！！</h2>
+<p>PS:这题纯模拟就行，小心大小写！！</p>
+<hr>
+
       
     </div>
     
@@ -557,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ISBN%E5%8F%B7%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">ISBN号码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PS-%E8%BF%99%E9%A2%98%E7%BA%AF%E6%A8%A1%E6%8B%9F%E5%B0%B1%E8%A1%8C%EF%BC%8C%E5%B0%8F%E5%BF%83%E5%A4%A7%E5%B0%8F%E5%86%99%EF%BC%81%EF%BC%81"><span class="nav-number">1.1.</span> <span class="nav-text">PS:这题纯模拟就行，小心大小写！！</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ISBN%E5%8F%B7%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">ISBN号码</span></a></li></ol></div>
             
 
           </div>
