@@ -378,10 +378,12 @@
 <span id="more"></span>
 
 <h1 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h1><hr>
-<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><p>1.编写通常接受一个参数(字符串的地址),并打印该字符串的函数。然而,如果提供了第二个参数(int类型），且该参数不为0，则该函数打印字符串的次数将为该函数被调用的次数(注意,字符串的打印次数不等于第二个参数的值而等于函数被调用的次数)。是的，这是一个非常可笑的函数，但它让您能够使用本章介绍的一些技术。在一个简单的程序中使用该函数，以演示该函数是如何工作的。</p>
+<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><hr>
+<p>1.编写通常接受一个参数(字符串的地址),并打印该字符串的函数。然而,如果提供了第二个参数(int类型），且该参数不为0，则该函数打印字符串的次数将为该函数被调用的次数(注意,字符串的打印次数不等于第二个参数的值而等于函数被调用的次数)。是的，这是一个非常可笑的函数，但它让您能够使用本章介绍的一些技术。在一个简单的程序中使用该函数，以演示该函数是如何工作的。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">void prt(char* s, int n = 0)</span><br><span class="line">&#123;</span><br><span class="line">	static int count = 0;</span><br><span class="line">	// static 所谓”记忆性”是指在两次函数调用时,</span><br><span class="line">	// 在第二次调用进入时, 能保持第一次调用退出时的值，直至重新赋值。</span><br><span class="line">	// static 具有全局唯一性的特点, 每次调用时, 都指向同一块内存。</span><br><span class="line">	count++;</span><br><span class="line">	if (n != 0)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i = 0; i &lt; count; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">		cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	char s[] = &quot;print&quot;;</span><br><span class="line">	prt(s);</span><br><span class="line">	prt(s);</span><br><span class="line">	prt(s);</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">	prt(s, 10);</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><ol start="2">
+<h2 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h2><hr>
+<ol start="2">
 <li>CandyBar结构包含3个成员。第一个成员存储candy bar的品牌名称；第二个成员存储candy bar的重量(可能有小数)；第三个成员存储candy bar的热量(整数)。 请编写一个程序,它使用一个这样的函数,即将CandyBar的引用、char指针、double和int作为参数,并用最后3个值设置相应的结构成员,最后3个参数的默认值分别为“Millennijum  Munch “、2.85和350。另外，该程序还包含一个以 CandyBar 的引用为参数，并显示结构内容的函数。请尽可能使用const。</li>
 </ol>
 <p>尽可能使用const避免修改不准修改的值<br>const在函数传参时加入可避免修改传入的结构</p>
